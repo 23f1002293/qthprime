@@ -1,1 +1,84 @@
-<html><body><h1>Hello, World!</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Button App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* The key requirement: a blue button */
+        .blue-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .blue-button:hover {
+            background-color: darkblue;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Form</h1>
+        <form id="myForm">
+            <input type="text" id="nameInput" placeholder="Enter your name">
+            <button type="submit" class="blue-button">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Get the value from the input field
+            const name = document.getElementById('nameInput').value;
+
+            // Get the result display element
+            const resultDiv = document.getElementById('result');
+
+            // Display a message
+            if (name) {
+                resultDiv.textContent = `Hello, ${name}! The button is blue.`;
+            } else {
+                resultDiv.textContent = 'Please enter your name.';
+            }
+        });
+    </script>
+</body>
+</html>
