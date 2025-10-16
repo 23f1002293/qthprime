@@ -1,84 +1,39 @@
-# Blue Button Application
+# Q-th Prime Number Calculator
 
 ## Summary
 
-This is a minimal, full-stack web application that demonstrates a simple interactive form. The main feature, as per the user request, is a submit button styled with a blue background color. The application is built with a Python Flask backend to serve the HTML and a vanilla JavaScript frontend to handle user interaction.
+This is a minimal, single-page web application that computes the q-th prime number. A user enters an integer `q`, and the application finds and displays the prime number at that position in the sequence of primes (e.g., for q=1, the result is 2; for q=2, the result is 3).
+
+The entire application is contained within a single `index.html` file, utilizing vanilla JavaScript for the logic and simple CSS for styling.
 
 ## Setup
 
-Follow these steps to set up and run the application locally.
-
-1.  **Prerequisites**:
-    *   Python 3.x installed.
-    *   `pip` (Python package installer) available.
-
-2.  **Download the files**:
-    Place `main.py` and `index.html` in the same directory.
-
-3.  **Install dependencies**:
-    This application requires the Flask library. Install it using pip:
-    ```bash
-    pip install Flask
-    ```
-
-4.  **Run the application**:
-    Execute the Python script from your terminal:
-    ```bash
-    python main.py
-    ```
-
-5.  **Access the application**:
-    You will see output indicating the server is running, usually on `http://127.0.0.1:8080`. Open this URL in your web browser.
+No installation or build process is required. Simply download the `index.html` file and open it in any modern web browser.
 
 ## Usage
 
-1.  Open your web browser and navigate to the URL where the application is running (e.g., `http://127.0.0.1:8080`).
-2.  You will see a title, a text input field, and a blue "Submit" button.
-3.  Enter any text into the input field.
-4.  Click the blue "Submit" button.
-5.  The text you entered will be displayed below the form without the page reloading.
+1.  Open the `index.html` file in your browser.
+2.  You will see an input field labeled "Enter a number (q):".
+3.  Type a positive integer into the field.
+4.  Click the blue "Find Prime" button.
+5.  The application will calculate the result and display it below the button.
+
+For large values of `q`, the calculation may take a few moments. The UI will display a "Calculating..." message during this time.
 
 ## Code Explanation
 
-### `main.py`
-This file contains the backend server code using the Flask framework.
--   It imports `Flask` and `render_template`.
--   It creates a Flask application instance.
--   It defines a single route `/` which, when accessed, serves the `index.html` file to the client.
--   The `if __name__ == '__main__':` block ensures the server only runs when the script is executed directly.
-
 ### `index.html`
-This file contains the structure, styling, and client-side logic for the web page.
--   **HTML**: Defines the basic page structure, including a `<h1>` title, a `<form>`, an `<input>` field, a `<button>`, and a `div` with the id `result` to display output.
--   **CSS**: Contained within a `<style>` block. It provides basic styling for the page. The key rule is `button { background-color: blue; }`, which fulfills the primary requirement.
--   **JavaScript**: Contained within a `<script>` block.
-    -   It adds an event listener to the form's `submit` event.
-    -   `event.preventDefault()` is called to stop the browser from reloading the page on form submission.
-    -   It retrieves the value from the text input field and updates the `textContent` of the `result` div to display the user's input.
+
+The file contains three main parts: HTML for the structure, CSS for styling, and JavaScript for the functionality.
+
+*   **HTML Structure**: A simple form contains a number input (`<input type="number">`), a submit button (`<button>`), and a `div` element with the ID `result` to display the output.
+*   **CSS Styling**: Inline CSS within a `<style>` tag provides basic centering, font settings, and styling for the form elements. As requested, the button has a blue background.
+*   **JavaScript Logic**: The core logic is within a `<script>` tag.
+    *   **Event Listener**: An event listener is attached to the form's `submit` event. It prevents the default page reload, gets the user's input, and triggers the prime number calculation.
+    *   **`findNthPrime(q)`**: This function finds the q-th prime. It starts counting from the number 2 and iterates upwards, using the `isPrime` helper function to check each number. It keeps a count of the primes it has found. When the count matches `q`, it returns the current number.
+    *   **`isPrime(num)`**: This is a helper function that determines if a given number is prime. It uses an efficient trial division method, checking for divisibility only up to the square root of the number.
+    *   **Responsiveness**: The calculation is wrapped in a `setTimeout(..., 0)` to allow the browser to update the UI with a "Calculating..." message before starting the potentially long-running computation. This prevents the UI from freezing.
 
 ## License
 
 This project is licensed under the MIT License.
-
----
-**MIT License**
-
-Copyright (c) 2024
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
