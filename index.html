@@ -6,47 +6,50 @@
     <title>Blue Button App</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            flex-direction: column;
-            background-color: #f0f0f0;
+            background-color: #f4f4f9;
         }
         .container {
             text-align: center;
-            padding: 2rem;
-            border-radius: 8px;
+            padding: 2rem 3rem;
             background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         h1 {
             color: #333;
         }
         input[type="text"] {
-            padding: 10px;
-            margin-right: 10px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            width: 250px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        /* The key requirement: a blue button */
-        .blue-button {
-            background-color: blue;
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
             color: white;
+            background-color: blue; /* Requirement: Blue button */
             border: none;
-            padding: 10px 20px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            transition: background-color 0.2s;
         }
-        .blue-button:hover {
+        button:hover {
             background-color: darkblue;
         }
         #result {
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
             color: #555;
         }
     </style>
@@ -55,28 +58,29 @@
     <div class="container">
         <h1>Interactive Form</h1>
         <form id="myForm">
-            <input type="text" id="nameInput" placeholder="Enter your name">
-            <button type="submit" class="blue-button">Submit</button>
+            <input type="text" id="textInput" placeholder="Enter some text...">
+            <br>
+            <button type="submit">Submit</button>
         </form>
         <div id="result"></div>
     </div>
 
     <script>
         document.getElementById('myForm').addEventListener('submit', function(event) {
-            // Prevent the default form submission behavior
+            // Prevent the default form submission behavior (page reload)
             event.preventDefault();
 
             // Get the value from the input field
-            const name = document.getElementById('nameInput').value;
+            const inputValue = document.getElementById('textInput').value;
 
             // Get the result display element
             const resultDiv = document.getElementById('result');
 
-            // Display a message
-            if (name) {
-                resultDiv.textContent = `Hello, ${name}! The button is blue.`;
+            // Display the result or a prompt if input is empty
+            if (inputValue.trim() === '') {
+                resultDiv.textContent = 'Please enter some text.';
             } else {
-                resultDiv.textContent = 'Please enter your name.';
+                resultDiv.textContent = `You entered: ${inputValue}`;
             }
         });
     </script>
